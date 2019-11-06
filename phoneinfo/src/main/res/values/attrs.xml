@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DialCodeViewAttrs">
+        <attr name="validText" format="string"/>
+        <attr name="inValidText" format="string"/>
+        <attr name="validTextColor" format="color"/>
+        <attr name="inValidTextColor" format="color"/>
+        <attr name="spinnerBg" format="reference"/>
+        <attr name="editBg" format="reference"/>
+    </declare-styleable>
+</resources>

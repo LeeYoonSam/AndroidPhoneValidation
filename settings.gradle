@@ -1,0 +1,2 @@
+include ':app', ':phoneinfo'
+rootProject.name='FlagCountryApp'

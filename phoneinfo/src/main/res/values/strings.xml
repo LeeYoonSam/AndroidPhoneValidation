@@ -1,0 +1,4 @@
+<resources>
+    <string name="default_valid_phone" type="string">Valid phone number</string>
+    <string name="default_invalid_phone" type="string">Invalid phone number</string>
+</resources>

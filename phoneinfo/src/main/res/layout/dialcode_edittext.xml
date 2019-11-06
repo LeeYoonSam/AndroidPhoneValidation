@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/spFlag"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:spinnerMode="dropdown"
+        android:dropDownWidth="300dp"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etPhoneNumber"/>
+
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:inputType="phone"
+        android:layout_marginLeft="10dp"
+        android:paddingStart="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintHorizontal_weight="5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/spFlag"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/spFlag"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        android:textColor="@android:color/darker_gray"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
