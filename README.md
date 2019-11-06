@@ -5,6 +5,9 @@
 2. phone field and check validation
 3. provide attributes for change widget resource
 
+## Dependency
+[![](https://jitpack.io/v/LeeYoonSam/AndroidPhoneValidation.svg)](https://jitpack.io/#LeeYoonSam/AndroidPhoneValidation)
+
 ## Example
 ```xml
 <com.ys.phoneinfo.view.DialCodeEditText
