@@ -9,6 +9,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +27,6 @@ import com.ys.phoneinfo.R
 import com.ys.phoneinfo.extension.getIdentifierHeight
 import kotlinx.android.synthetic.main.dialcode_edittext.view.*
 
-@RequiresApi(Build.VERSION_CODES.M)
 class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val items = Countries.COUNTRIES
     var selectedCountry: Country
@@ -32,10 +34,22 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
     private val mPhoneUtil = PhoneNumberUtil.getInstance()
     private var mDefaultCountryPosition = 0
 
+    private var hideMessageArea: Boolean = false
     private var validText: String? = null
     private var inValidText: String? = null
     private var validTextColor: Int
     private var inValidTextColor: Int
+
+    interface ValidationListener {
+        fun onValid()
+        fun onInValid()
+    }
+
+    private var validationListener: ValidationListener? = null
+
+    fun setValidationListener(validationListener: ValidationListener) {
+        this.validationListener = validationListener
+    }
 
     init {
         val config = BundledEmojiCompatConfig(context)
@@ -124,6 +138,33 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
         }
     }
 
+    fun getEditText(): EditText {
+        return etPhoneNumber
+    }
+
+    fun getSpinner(): Spinner {
+        return spFlag
+    }
+
+    fun getTextView(): TextView {
+        return tvMessage
+    }
+
+    fun setHint(hint: String) {
+        etPhoneNumber.hint = hint
+    }
+
+    fun hideMessageArea(isHide: Boolean) {
+        hideMessageArea = isHide
+
+        if(isHide) {
+            tvMessage.visibility = View.GONE
+            return
+        }
+
+        tvMessage.visibility = View.VISIBLE
+    }
+
     fun getInputPhoneNumber(): String {
         return etPhoneNumber.text.toString()
     }
@@ -164,9 +205,21 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
         val isValid = mPhoneUtil.isValidNumber(parsePhoneNumber(inputText))
 
         if(isValid) {
+            if(!hideMessageArea) {
+                validationListener?.let {
+                    it.onValid()
+                }
+            }
+
             tvMessage.text = validText ?: context.getString(R.string.default_valid_phone)
             tvMessage.setTextColor(validTextColor)
         } else {
+            if(!hideMessageArea) {
+                validationListener?.let {
+                    it.onInValid()
+                }
+            }
+
             tvMessage.text = inValidText ?: context.getString(R.string.default_invalid_phone)
             tvMessage.setTextColor(inValidTextColor)
         }
@@ -184,17 +237,17 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
         setPhoneEditEnable(false)
     }
 
-    fun setFlagEnable(isEnable: Boolean) {
-        setEnable(spFlag, isEnable)
+    fun setFlagEnable(status: Boolean) {
+        setEnable(spFlag, status)
     }
 
-    fun setPhoneEditEnable(isEnable: Boolean) {
-        setEnable(etPhoneNumber, isEnable)
+    fun setPhoneEditEnable(status: Boolean) {
+        setEnable(etPhoneNumber, status)
     }
 
-    private fun setEnable(view: View, isEnable: Boolean) {
-        view.isSelected = isEnable
-        view.isEnabled = isEnabled
+    private fun setEnable(view: View, status: Boolean) {
+        view.isSelected = status
+        view.isEnabled = status
     }
 
     private fun setSpinnerBackground(@DrawableRes res: Int) {

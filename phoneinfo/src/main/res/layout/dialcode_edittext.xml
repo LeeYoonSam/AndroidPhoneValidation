@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <Spinner
         android:id="@+id/spFlag"
@@ -11,6 +11,7 @@
         android:layout_height="52dp"
         android:spinnerMode="dropdown"
         android:dropDownWidth="300dp"
+        android:background="@drawable/selector_edittext"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,8 @@
         android:layout_marginLeft="10dp"
         android:paddingStart="16dp"
         android:paddingRight="16dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/selector_edittext"
         app:layout_constraintHorizontal_weight="5"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/spFlag"
