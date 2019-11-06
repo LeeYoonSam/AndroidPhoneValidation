@@ -124,8 +124,16 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
         }
     }
 
-    private fun getInputPhoneNumber(): String {
+    fun getInputPhoneNumber(): String {
         return etPhoneNumber.text.toString()
+    }
+
+    fun getDialCode(): Int {
+        return selectedCountry.dialCode
+    }
+
+    fun getIso2(): String {
+        return selectedCountry.iso2
     }
 
     @Throws(NumberParseException::class)
