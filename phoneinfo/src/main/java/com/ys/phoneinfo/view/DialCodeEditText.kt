@@ -205,19 +205,16 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
         val isValid = mPhoneUtil.isValidNumber(parsePhoneNumber(inputText))
 
         if(isValid) {
-            if(!hideMessageArea) {
-                validationListener?.let {
-                    it.onValid()
-                }
+            validationListener?.let {
+                it.onValid()
             }
 
             tvMessage.text = validText ?: context.getString(R.string.default_valid_phone)
             tvMessage.setTextColor(validTextColor)
         } else {
-            if(!hideMessageArea) {
-                validationListener?.let {
-                    it.onInValid()
-                }
+
+            validationListener?.let {
+                it.onInValid()
             }
 
             tvMessage.text = inValidText ?: context.getString(R.string.default_invalid_phone)
