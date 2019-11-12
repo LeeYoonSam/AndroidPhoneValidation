@@ -26,6 +26,7 @@ import com.ys.phoneinfo.FlagAdapter
 import com.ys.phoneinfo.R
 import com.ys.phoneinfo.extension.getIdentifierHeight
 import kotlinx.android.synthetic.main.dialcode_edittext.view.*
+import java.util.*
 
 class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val items = Countries.COUNTRIES
@@ -175,6 +176,11 @@ class DialCodeEditText @JvmOverloads constructor(context: Context, attrs: Attrib
 
     fun getIso2(): String {
         return selectedCountry.iso2
+    }
+
+    fun getIso3(): String {
+        val local = Locale("", getIso2())
+        return local.isO3Country
     }
 
     @Throws(NumberParseException::class)
